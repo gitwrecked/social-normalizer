@@ -1,6 +1,10 @@
 package com.gitwrecked.social.cdm;
 
-public class TwitterDto {
+import java.io.Serializable;
+
+public class TwitterDto implements Serializable{
+
+	private static final long serialVersionUID = -6867736771747690202L;
 
 	String message;
 

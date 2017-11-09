@@ -1,46 +1,40 @@
 package com.gitwrecked.social;
 
-import org.apache.flink.api.java.utils.ParameterTool;
-import org.apache.flink.configuration.Configuration;
-import org.apache.flink.streaming.api.datastream.DataStream;
+import com.gitwrecked.social.cdm.TwitterDto;
+import com.gitwrecked.social.serialization.JsonSerializationSchema;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer010;
-import org.apache.flink.streaming.util.serialization.SimpleStringSchema;
 
-import java.io.IOException;
 import java.util.Properties;
 
 public class MockTwitterStreamProducer {
 
 	public static void main(String[] args) throws Exception {
-		// create execution environment
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-		// parse parameters
-		Properties properties = buildProperties();
+		DataStreamSource<TwitterDto> messageStream = env.addSource(new TwitterMessageGenerator());
+		messageStream.name("mock-twitter-messages");
 
-		// add a simple source which is writing some strings
-		DataStream<String> messageStream = env.addSource(new SimpleStringGenerator());
-
-		// write stream to Kafka
-		messageStream.addSink(new FlinkKafkaProducer010<String>(properties.getProperty("bootstrap.servers"),
-				properties.getProperty("topic"),
-				new SimpleStringSchema()));
+		messageStream.addSink(buildTwitterMessageSink()).name("twitter-messages");
 
 		env.execute();
 	}
 
-	public static class SimpleStringGenerator implements SourceFunction<String> {
+	public static class TwitterMessageGenerator implements SourceFunction<TwitterDto> {
 		private static final long serialVersionUID = 2174904787118597072L;
 		boolean running = true;
 		long i = 0;
 
 		@Override
-		public void run(SourceContext<String> ctx) throws Exception {
+		public void run(SourceContext<TwitterDto> ctx) throws Exception {
 			while (running) {
-				String output = "{message:'" + (i++) + "'}";
-				ctx.collect(output);
+				String output = "message-" + (i++);
+				TwitterDto twitterDto = new TwitterDto();
+				twitterDto.setMessage(output);
+				ctx.collect(twitterDto);
 				System.out.println("MockTwitterMessage: " + output);
 				Thread.sleep(5000);
 			}
@@ -52,10 +46,14 @@ public class MockTwitterStreamProducer {
 		}
 	}
 
-	private static Properties buildProperties() throws IOException {
+	private static SinkFunction<TwitterDto> buildTwitterMessageSink() {
 		Properties properties = new Properties();
 		properties.setProperty("bootstrap.servers", "localhost:9092");
 		properties.setProperty("topic", "twitter-messages");
-		return properties;
+
+		return new FlinkKafkaProducer010<TwitterDto>(
+				properties.getProperty("topic"),
+				new JsonSerializationSchema<TwitterDto>(),
+				properties);
 	}
 }

@@ -1,6 +1,10 @@
 package com.gitwrecked.social.cdm;
 
-public class NormalizedDto {
+import java.io.Serializable;
+
+public class NormalizedDto implements Serializable {
+
+	private static final long serialVersionUID = -6867736771747690203L;
 
 	String message;
 
