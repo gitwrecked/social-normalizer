@@ -1,28 +1,36 @@
 package com.gitwrecked.social.mapFunction;
 
-import com.gitwrecked.social.cdm.NormalizedDto;
-import com.gitwrecked.social.cdm.SourceType;
-import com.gitwrecked.social.cdm.TwitterDto;
+import com.gitwrecked.social.cdm.MessageType;
+import com.gitwrecked.social.cdm.NormalizedMessageDto;
+import com.gitwrecked.social.cdm.TwitterMessageDto;
 import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
+import org.apache.flink.util.OutputTag;
 
-public class NormalizeTwitterMessageFunction extends ProcessFunction<TwitterDto, NormalizedDto> {
+public class NormalizeTwitterMessageFunction extends ProcessFunction<TwitterMessageDto, NormalizedMessageDto> {
+
+	private OutputTag<TwitterMessageDto> normalizeErrorOut;
+
+	public NormalizeTwitterMessageFunction(OutputTag<TwitterMessageDto> normalizeErrorOut) {
+		this.normalizeErrorOut = normalizeErrorOut;
+	}
 
 	@Override
-	public void processElement(TwitterDto twitterDto, Context ctx, Collector<NormalizedDto> out) throws Exception {
+	public void processElement(TwitterMessageDto twitterMessageDto, Context ctx, Collector<NormalizedMessageDto> out) throws Exception {
 		try {
-			NormalizedDto normalizedDto = map(twitterDto);
-			System.out.println("Normalized: " + normalizedDto.getMessage());
-			out.collect(normalizedDto);
+			NormalizedMessageDto normalizedMessageDto = map(twitterMessageDto);
+			System.out.println("Normalized: " + normalizedMessageDto.getMessage());
+			out.collect(normalizedMessageDto);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			ctx.output(normalizeErrorOut, twitterMessageDto);
 		}
 	}
 
-	public NormalizedDto map(TwitterDto twitterDto) throws Exception {
-		NormalizedDto normalizedDto = new NormalizedDto();
-		normalizedDto.setMessage(twitterDto.getMessage());
-		normalizedDto.setSource(SourceType.TWITTER);
-		return normalizedDto;
+	public NormalizedMessageDto map(TwitterMessageDto twitterMessageDto) throws Exception {
+		NormalizedMessageDto normalizedMessageDto = new NormalizedMessageDto();
+		normalizedMessageDto.setMessage(twitterMessageDto.getMessage());
+		normalizedMessageDto.setSource(MessageType.TWITTER);
+		return normalizedMessageDto;
 	}
 }

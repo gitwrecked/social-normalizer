@@ -1,5 +1,5 @@
 package com.gitwrecked.social.cdm;
 
-public enum SourceType {
+public enum MessageType {
 	FACEBOOK,TWITTER,INSTAGRAM
 }

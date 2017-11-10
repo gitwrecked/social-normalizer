@@ -2,7 +2,7 @@ package com.gitwrecked.social.cdm;
 
 import java.io.Serializable;
 
-public class NormalizedDto implements Serializable {
+public class NormalizedMessageDto implements Serializable {
 
 	private static final long serialVersionUID = -6867736771747690203L;
 
@@ -10,7 +10,7 @@ public class NormalizedDto implements Serializable {
 
 	Boolean isNormalized = true;
 
-	SourceType source;
+	MessageType source;
 
 	public String getMessage() {
 		return message;
@@ -28,11 +28,11 @@ public class NormalizedDto implements Serializable {
 		this.isNormalized = isNormalized;
 	}
 
-	public SourceType getSource() {
+	public MessageType getSource() {
 		return source;
 	}
 
-	public void setSource(SourceType source) {
+	public void setSource(MessageType source) {
 		this.source = source;
 	}
 }
