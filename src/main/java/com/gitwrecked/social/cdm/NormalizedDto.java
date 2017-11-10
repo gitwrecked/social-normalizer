@@ -10,6 +10,8 @@ public class NormalizedDto implements Serializable {
 
 	Boolean isNormalized = true;
 
+	SourceType source;
+
 	public String getMessage() {
 		return message;
 	}
@@ -24,5 +26,13 @@ public class NormalizedDto implements Serializable {
 
 	public void setIsNormalized(Boolean isNormalized) {
 		this.isNormalized = isNormalized;
+	}
+
+	public SourceType getSource() {
+		return source;
+	}
+
+	public void setSource(SourceType source) {
+		this.source = source;
 	}
 }

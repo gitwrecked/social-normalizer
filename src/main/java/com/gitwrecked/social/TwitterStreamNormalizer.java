@@ -38,7 +38,7 @@ public class TwitterStreamNormalizer {
 	private static SourceFunction<ObjectNode> buildTwitterSource() throws IOException {
 		Properties properties = new Properties();
 		properties.setProperty("bootstrap.servers", "localhost:9092");
-		properties.setProperty("group.id", "social-aggregator");
+		properties.setProperty("group.id", "social-normalizer");
 		properties.setProperty("topic", "twitter-messages");
 
 		FlinkKafkaConsumer010<ObjectNode> kafkaConsumer = new FlinkKafkaConsumer010<>(

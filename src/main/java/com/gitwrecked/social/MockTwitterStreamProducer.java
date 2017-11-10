@@ -8,6 +8,7 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer010;
 
+import java.util.Date;
 import java.util.Properties;
 
 public class MockTwitterStreamProducer {
@@ -31,7 +32,7 @@ public class MockTwitterStreamProducer {
 		@Override
 		public void run(SourceContext<TwitterDto> ctx) throws Exception {
 			while (running) {
-				String output = "message-" + (i++);
+				String output = "message-" + new Date().getTime();
 				TwitterDto twitterDto = new TwitterDto();
 				twitterDto.setMessage(output);
 				ctx.collect(twitterDto);
