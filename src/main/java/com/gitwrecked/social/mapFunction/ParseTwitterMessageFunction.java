@@ -27,7 +27,7 @@ public class ParseTwitterMessageFunction extends ProcessFunction<ObjectNode, Twi
 		}
 	}
 
-	private TwitterMessageDto map(ObjectNode jsonNodes) throws Exception {
+	public TwitterMessageDto map(ObjectNode jsonNodes) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		TwitterMessageDto twitterMessageDto = mapper.treeToValue(jsonNodes, TwitterMessageDto.class);
 		return twitterMessageDto;
