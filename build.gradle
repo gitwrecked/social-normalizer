@@ -6,8 +6,15 @@ buildscript {
 		gradle_version = "4.1"
 	}
 	repositories {
-		mavenLocal()
+		maven {
+			url 'https://mymavenrepo.com/repo/8CXUtBiOO3eCj2YIF01r/'
+			credentials {
+				username = 'myMavenRepo'
+				password = '1234Abcd'
+			}
+		}
 		mavenCentral()
+		mavenLocal()
 	}
 	dependencies {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE"
