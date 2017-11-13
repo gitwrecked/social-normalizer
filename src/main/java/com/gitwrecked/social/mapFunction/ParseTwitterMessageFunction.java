@@ -2,7 +2,7 @@ package com.gitwrecked.social.mapFunction;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.gitwrecked.social.cdm.TwitterMessageDto;
+import com.gitwrecked.social.v0.dto.TwitterMessageDto;
 import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;

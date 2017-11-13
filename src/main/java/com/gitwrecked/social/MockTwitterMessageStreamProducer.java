@@ -1,7 +1,7 @@
 package com.gitwrecked.social;
 
-import com.gitwrecked.social.cdm.TwitterMessageDto;
 import com.gitwrecked.social.serialization.JsonSerializationSchema;
+import com.gitwrecked.social.v0.dto.TwitterMessageDto;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;

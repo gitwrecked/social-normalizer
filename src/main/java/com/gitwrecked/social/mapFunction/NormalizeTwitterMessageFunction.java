@@ -1,8 +1,8 @@
 package com.gitwrecked.social.mapFunction;
 
-import com.gitwrecked.social.cdm.MessageType;
-import com.gitwrecked.social.cdm.NormalizedMessageDto;
-import com.gitwrecked.social.cdm.TwitterMessageDto;
+import com.gitwrecked.social.v0.dto.MessageType;
+import com.gitwrecked.social.v0.dto.NormalizedMessageDto;
+import com.gitwrecked.social.v0.dto.TwitterMessageDto;
 import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;

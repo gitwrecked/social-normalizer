@@ -1,11 +1,11 @@
 package com.gitwrecked.social;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.gitwrecked.social.cdm.NormalizedMessageDto;
-import com.gitwrecked.social.cdm.TwitterMessageDto;
 import com.gitwrecked.social.mapFunction.NormalizeTwitterMessageFunction;
 import com.gitwrecked.social.mapFunction.ParseTwitterMessageFunction;
 import com.gitwrecked.social.serialization.JsonSerializationSchema;
+import com.gitwrecked.social.v0.dto.NormalizedMessageDto;
+import com.gitwrecked.social.v0.dto.TwitterMessageDto;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

@@ -1,10 +1,13 @@
+group = 'com.gitwrecked.social'
+version = '0.0.1-SNAPSHOT'
+
 buildscript {
 	ext {
 		gradle_version = "4.1"
 	}
 	repositories {
-		mavenCentral()
 		mavenLocal()
+		mavenCentral()
 	}
 	dependencies {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE"
@@ -13,6 +16,7 @@ buildscript {
 		classpath "org.apache.flink:flink-clients_2.10:1.3.1"
 		classpath "org.apache.flink:flink-connector-kafka-0.10_2.10:1.3.1"
 		classpath "com.github.rholder:gradle-one-jar:1.0.4"
+		classpath "com.gitwrecked.social:social-cdm:0.0.1-SNAPSHOT"
 	}
 }
 
@@ -47,8 +51,9 @@ jar {
 }
 
 repositories {
-	mavenCentral()
 	mavenLocal()
+	mavenCentral()
+
 }
 
 dependencies {
@@ -59,6 +64,7 @@ dependencies {
 	compile "org.apache.flink:flink-clients_2.10:1.3.1"
 	compile "org.apache.flink:flink-connector-kafka-0.10_2.10:1.3.1"
 	compile "org.springframework.kafka:spring-kafka:1.1.1.RELEASE"
+	compile "com.gitwrecked.social:social-cdm:0.0.1-SNAPSHOT"
 	testCompile "org.springframework.boot:spring-boot-starter-test"
 	testCompile "junit:junit:4.12"
 }
