@@ -58,7 +58,6 @@ client/dists/
 ### BUILD ###
 ## Gradle
 .gradle/
-gradle/
 build/
 
 ### JAVA ###
