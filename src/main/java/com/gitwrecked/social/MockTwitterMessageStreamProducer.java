@@ -12,6 +12,11 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import java.util.Date;
 import java.util.Properties;
 
+/**
+ * This will be removed in future revisions,
+ * as there is a separate for this function.
+ */
+@Deprecated
 public class MockTwitterMessageStreamProducer {
 
 	public static void main(String[] args) throws Exception {
